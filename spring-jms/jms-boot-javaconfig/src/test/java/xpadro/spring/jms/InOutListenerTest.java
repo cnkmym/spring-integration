@@ -30,12 +30,20 @@ public class InOutListenerTest {
 	
 	@Test
 	public void registerOrder() throws InterruptedException {
-		clientService.registerOrder(new Order("order1"));
+		clientService.registerOrder(new Order("order1","Hello Hello"));
+		clientService.registerOrder(new Order("order2"));
 		Thread.sleep(1000);
 		
-		Optional<Order> storedOrder = storeService.getReceivedOrder("order1");
-		Assert.assertTrue(storedOrder.isPresent());
-		Assert.assertEquals("order1", storedOrder.get().getId());
-		Assert.assertEquals("order1", registerService.getLastReceivedOrderId());
+		Optional<Order> storedOrder1 = storeService.getReceivedOrder("order1");
+		Assert.assertTrue(storedOrder1.isPresent());
+		Order order = storedOrder1.get();
+		Assert.assertEquals("order1", order.getId());
+		Assert.assertEquals("Hello Hello", order.getValue());
+		
+		Optional<Order> storedOrder2 = storeService.getReceivedOrder("order2");
+		Assert.assertTrue(storedOrder2.isPresent());
+		order = storedOrder2.get();
+		Assert.assertEquals("order2", order.getId());
+		Assert.assertNotEquals("Hello Hello", order.getValue());
 	}
 }
