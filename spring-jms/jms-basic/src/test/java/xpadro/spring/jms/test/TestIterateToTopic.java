@@ -34,12 +34,12 @@ public class TestIterateToTopic {
 	public void testTopicSending() throws InterruptedException {
 		Notification notification = null;
 		
-		for (int i=1;i<11;i++) {
+		for (int i=1;i<1001;i++) {
 			notification = new Notification(String.valueOf(i), "this is a topic");
 			producer.convertAndSendTopic(notification);
 		}
 		
 		Thread.sleep(2000);
-		assertEquals(10, registry.getReceivedNotifications().size());
+		assertEquals(1000, registry.getReceivedNotifications().size());
 	}
 }

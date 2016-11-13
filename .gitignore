@@ -1,3 +1,7 @@
 .idea/
 *.iml
 target/
+spring-jms/tmp
+**/*/.classpath
+**/*/.project
+**/*/.settings
